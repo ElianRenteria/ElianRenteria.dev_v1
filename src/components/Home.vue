@@ -23,7 +23,7 @@
 <style scoped>
     .p-card {
         margin: 4rem;
-        background-color: rgba(40, 40, 40, .35) !important;
+        background-color: rgba(40, 40, 40, 0) !important;
         font-family: 'Roboto', sans-serif !important;
         font-weight: 100 !important;
         height: 85%;

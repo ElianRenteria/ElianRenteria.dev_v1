@@ -153,5 +153,6 @@ export default {
     justify-content: center;
     align-items:start;
     height: 83%;
+    overflow: scroll;
   }
 </style>
