@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-const githubToken = require('./github_repo_key.json');
+//const githubToken = require('./github_repo_key.json');
 import Loading from './LoadingProjects.vue';
 
 export default {
@@ -38,7 +38,7 @@ export default {
         do {
           response = await axios.get(`https://api.github.com/users/ElianRenteria/repos?page=${page}&per_page=100`, {
             headers: {
-              Authorization: `Bearer ${githubToken.token}`
+              Authorization: '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'//`Bearer ${githubToken.token}`
             }
           });
           
