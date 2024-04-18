@@ -7,7 +7,7 @@
             <h5>Email:</h5>
             <p>Elianrenteriadevelopment@gmail.com</p>
             <h5>Phone:</h5>
-            <p>+1234567890</p>
+            <p>+1 909-314-3799</p>
             <h5>Social Media:</h5>
             <div class="social-links">
                 <a href="https://linkedin.com/in/elian-renteria-5a467b29b" target="_blank"><i class="pi pi-linkedin" style="font-size: 2.5rem"></i></a>
