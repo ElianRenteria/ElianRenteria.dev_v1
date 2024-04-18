@@ -24,7 +24,7 @@
         <ul class="nav-links">
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/projects">Projects</router-link></li>
-          <li><router-link to="/Resume">Resume</router-link></li>
+          <li><router-link to="/resume">Resume</router-link></li>
           <li><router-link to="/contact">Contact</router-link></li>
         </ul>
       </div>
@@ -53,10 +53,10 @@
       padding: 0%;
   }
   .navbar {
-    background-color: rgba(34, 34, 34, .6); /* Dark background color */
-    color: #fff; /* Light text color */
+    background-color: rgba(34, 34, 34, .6);
+    color: #fff; 
     padding: 1rem 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
   }
 
   .container {

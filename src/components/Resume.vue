@@ -15,7 +15,7 @@
   import Card from 'primevue/card';
   
   export default {
-    name: 'Resume',
+    name: 'resume',
     components: {
       Card,
     },
