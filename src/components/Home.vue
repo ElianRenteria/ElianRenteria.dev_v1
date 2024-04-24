@@ -27,21 +27,18 @@
 </script>
 
 <template>
-    <Card>
+    <Card class="information">
         <template #title><div class="custom-title">Welcome to My Digital Portfolio</div></template>
         <template #content>
-          <div :class="{ 'inner-cards-row': isWideScreen, 'inner-cards-column': !isWideScreen }">
+          <div :class="{ 'inner-cards-row': isWideScreen, 'inner-cards-column': !isWideScreen}, information">
             <Card class="inner-card" style="border: none !important">
                 <template #content>
-                    <img src="../assets/images/me.jpg" alt="Avatar" class="portrait">
+                    <img src="../assets/images/me.jpg" alt="Avatar" :class="{'desktop': isWideScreen, 'mobile': !isWideScreen}">
                     <p>Recent Computer Science grad 🎓 | Eager Learner diving into Web & Mobile Development 💻📱 | Dog Lover 🐾 | Aquarium Enthusiast 🐠 | Coding Genius ✨</p>
-                    <br>
                 </template>
             </Card>
             <Card class="inner-card about" style="border: none !important">
                 <template #content class="card_2_content">
-                    <br>
-                    <br>
                     <p>👋 Hi, I'm Elian</p>
                     <p>👨‍💻 I'm a Full Stack Developer</p>
                     <p>🚀 I use React, Node.js, Express, MongoDB, and more</p>
@@ -49,12 +46,12 @@
                     <p>📱 I build mobile applications</p>
                     <p>🎨 I design user interfaces</p>
                     <p>🔧 I fix bugs and optimize performance</p>
-                    <p>📈 I help businesses grow</p>
                     <p>🌱 I'm always learning and growing</p>
                     <p>🐶 I love dogs</p>
                     <p>🐠 I love aquariums</p>
                 </template>
-                            
+                <template #footer>
+                </template>          
             </Card>
           </div>
         </template>
@@ -63,9 +60,20 @@
 
 
 <style scoped>
-    .portrait {
+    .p-card-footer {
+        display: none;
+    }
+    .desktop {
         border-radius: 50%;
-        height: 400px;
+        width: 20rem;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+    .mobile {
+        border-radius: 50%;
+        height: 12rem;
+        width: auto;
         width: auto;
         margin: 0 auto;
         display: block;
@@ -82,6 +90,9 @@
         padding: 0%;
         margin: 3%;
         overflow: hidden;
+    }
+    p-card, .information{
+        overflow: auto;
     }
     .p-card-title {
         font-family: 'Roboto', sans-serif !important;
@@ -111,7 +122,7 @@
     .inner-cards-column {
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: space-around;
         height: 100%;
         width: 100%;
     }
@@ -135,6 +146,11 @@
         font-weight: normal;
         font-size: 26px;
         font-family: 'Roboto', sans-serif !important;
+    }
+    .p-card-footer  {
+        display: none;
+        margin: 0;
+        padding: 0;
     }
 </style>
 
