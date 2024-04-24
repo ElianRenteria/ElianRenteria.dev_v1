@@ -28,7 +28,11 @@ export default {
 
         // Fetch repositories
         do {
-          response = await axios.get(`https://api.github.com/users/ElianRenteria/repos?page=${page}&per_page=100`);
+          response = await axios.get(`https://api.github.com/users/ElianRenteria/repos?page=${page}&per_page=100`,{
+            headers: {
+              Authorization: `Bearer ${process.env.VUE_APP_GITHUB_TOKEN}`
+            }
+          });
           allRepos = [...allRepos, ...response.data];
           page++;
         } while (response.data.length === 100);
