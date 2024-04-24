@@ -22,15 +22,17 @@ export default {
   methods: {
     async fetchProjects() {
       try {
+        // Retrieve GitHub access token from Cloudflare Worker endpoint
+        const envResponse = await axios.get('https://hello-world-weathered-mountain-8ec2.bravefrontier5913.workers.dev/');
+        const githubToken = envResponse.data.githubToken;
+        // Fetch repositories using the retrieved GitHub access token
         let allRepos = [];
         let page = 1;
         let response;
-
-        // Fetch repositories
         do {
-          response = await axios.get(`https://api.github.com/users/ElianRenteria/repos?page=${page}&per_page=100`,{
+          response = await axios.get(`https://api.github.com/users/ElianRenteria/repos?page=${page}&per_page=100`, {
             headers: {
-              Authorization: `Bearer ${process.env.VUE_APP_GITHUB_TOKEN}`
+              Authorization: `Bearer ${githubToken}`
             }
           });
           allRepos = [...allRepos, ...response.data];
@@ -47,6 +49,8 @@ export default {
         this.isLoading = false;
       } catch (error) {
         console.error('Error fetching GitHub projects:', error);
+        // Handle error
+        this.isLoading = false;
       }
     }
   }
