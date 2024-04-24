@@ -5,7 +5,7 @@
         </template>
         <template #content>
             <h5>Email:</h5>
-            <p>Elianrenteriadevelopment@gmail.com</p>
+            <p>elianrenteriadevelopment@gmail.com</p>
             <h5>Phone:</h5>
             <p>+1 909-314-3799</p>
             <h5>Social Media:</h5>
