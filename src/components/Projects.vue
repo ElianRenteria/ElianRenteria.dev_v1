@@ -117,7 +117,7 @@ p {
 /* Adjust title font size dynamically */
 .p-card-title {
   font-family: 'Roboto', sans-serif !important;
-  font-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+  font-size: calc(16px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
 }
 .p-card-content {
   font-family: 'Roboto', sans-serif !important;
