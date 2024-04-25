@@ -116,7 +116,18 @@ p {
 
 /* Adjust title font size dynamically */
 .p-card-title {
+  font-family: 'Roboto', sans-serif !important;
   font-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+}
+.p-card-content {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: calc(8px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+  font-weight: 200 !important;
+}
+p-card-subtitle {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: calc(10px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+  font-weight: 200 !important;
 }
 .projects-grid {
   margin: 0 auto;
