@@ -41,7 +41,7 @@ export default {
 
         // Fetch languages for each repository
         await Promise.all(allRepos.map(async repo => {
-          const languagesResponse = await axios.get(repo.languages_url);
+          const languagesResponse = await axios.get(repo.languages_url, {headers: {Authorization: `Bearer ${githubToken}`}});
           repo.languages = Object.keys(languagesResponse.data);
         }));
 
@@ -111,6 +111,7 @@ p {
   grid-gap: 20px; /* Adjust the gap between grid items */
   list-style: none;
   padding: 0;
+  overflow: auto !important;
 }
 
 /* Adjust title font size dynamically */
