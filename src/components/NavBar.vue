@@ -42,6 +42,7 @@ export default {
       menuItems: [
         { label: 'Home', to: '/' },
         { label: 'Projects', to: '/projects' },
+        { label: 'Tutorials', to: '/tutorials' },
         { label: 'Resume', to: '/resume' },
         { label: 'Contact', to: '/contact' }
       ]
@@ -70,6 +71,17 @@ export default {
     },
     checkViewportSize() {
       this.isSmallViewport = window.innerWidth < 768;
+    },
+    async loadTutorials() {
+    try {
+        const response = await fetch('../tutorials'); // Adjust the path to your tutorial JSON files
+        const tutorials = await response.json();
+        this.tutorials = tutorials; // Populate the tutorials array with the fetched data
+        this.isLoading = false; // Set isLoading to false after loading tutorials
+      } catch (error) {
+        console.error('Error loading tutorials:', error);
+        this.isLoading = false; // Set isLoading to false in case of error
+      }
     }
   }
 }
@@ -133,10 +145,6 @@ export default {
   font-size: 1.5rem;
   margin-left: auto;
   padding: 0.5rem;
-}
-
-.popup-menu:hover {
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .nav-links {

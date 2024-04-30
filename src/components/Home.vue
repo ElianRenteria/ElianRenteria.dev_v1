@@ -79,17 +79,16 @@
         display: block;
     }
     .p-card {
-        margin: 4rem;
+        margin: 2rem;
         background-color: rgba(255, 255, 255, 0) !important;
         border: 1px solid rgb(182, 182, 182) !important;
         font-family: 'Roboto', sans-serif !important;
         font-size: 18px;
         font-weight: 300 !important;
-        width: 90%;
+        width: 95%;
         height: 90%;
         padding: 0%;
-        margin: 3%;
-        overflow: hidden;
+        overflow: auto;
     }
     p-card, .information{
         overflow: auto;
@@ -151,6 +150,15 @@
         display: none;
         margin: 0;
         padding: 0;
+        height: 0;
+        width: 0;
+    }
+    .p-card-header {
+        display: none;
+        margin: 0;
+        padding: 0;
+        height: 0;
+        width: 0;
     }
 </style>
 
