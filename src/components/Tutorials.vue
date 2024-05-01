@@ -1,127 +1,138 @@
 <template>
-    <div class="container" :class="{ 'collapsed': isSmallViewport }">
-      <div class="sidebar-toggle" v-if="isSmallViewport">
-        <div class="tutorial_menu_button"><i class="pi pi-book" @click="toggleSidebar($event)"></i></div>
-      </div>
-  
-      <div class="sidebar_menu" :class="{ 'collapsed': isSmallViewport }">
-        <ul class="filter-menu">
-          <li v-for="item in expandedMenuItems" :key="item.label">
-            <p>{{ item.label }}</p>
-          </li>
-        </ul>
-      </div>
-
-      <div class="tutorials-grid">
-        <Loading v-if="isLoading" />
-        <ul class="grid-container">
-          <li v-for="tutorial in tutorials" :key="tutorial.id">
-              <Card>
-                <template #header>
-                  <img class="card_image" alt="user header" :src="tutorial.image" />
-                </template>
-                <template #title>
-                    {{ tutorial.title }}
-                </template>
-                <template #subtitle>
-                    {{ tutorial.languages.join(', ') }}
-                </template>
-                <template #content>
-                    <p class="m-0">{{ tutorial.description }}</p>
-                </template>
-                <template #footer>
-                  <Button class="p-button-rounded">View Tutorial</Button>
-                </template>
-              </Card>
-          </li>
-        </ul>
-      </div>
-  
-      <Menu ref="sidebarMenu" id="sidebar_menu" :model="popupMenuItems" :popup="true" />
+  <div class="container" :class="{ 'collapsed': isSmallViewport }">
+    <div class="sidebar-toggle" v-if="isSmallViewport">
+      <div class="tutorial_menu_button"><i class="pi pi-book" @click="toggleSidebar($event)"></i></div>
     </div>
+
+    <div class="sidebar_menu" :class="{ 'collapsed': isSmallViewport }">
+      <ul class="filter-menu">
+        <li v-for="item in expandedMenuItems" :key="item.label" @click="filterTutorials(item.label)">
+          <p>{{ item.label }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tutorials-grid">
+      <Loading v-if="isLoading" />
+      <ul class="grid-container">
+        <li v-for="tutorial in filteredTutorials" :key="tutorial.id">
+          <Card>
+            <template #header>
+              <img class="card_image" alt="user header" :src="tutorial.image" />
+            </template>
+            <template #title>
+              {{ tutorial.title }}
+            </template>
+            <template #subtitle>
+              {{ tutorial.languages.join(', ') }}
+            </template>
+            <template #footer>
+              <Button label="Start" severity="success" outlined rounded/>
+            </template>
+          </Card>
+        </li>
+      </ul>
+    </div>
+
+    <Menu ref="sidebarMenu" id="sidebar_menu" :model="popupMenuItems" :popup="true" />
+  </div>
 </template>
 
 <script>
-  import Card from 'primevue/card';
-  import Loading from './LoadingProjects.vue';
-  
-  export default {
-    name: 'Tutorials',
-    components: {
-      Card,
-      Loading
+import Card from 'primevue/card';
+import Loading from './LoadingProjects.vue';
+import Button from 'primevue/button';
+
+
+export default {
+  name: 'Tutorials',
+  components: {
+    Card,
+    Loading,
+    Button
+  },
+  data() {
+    return {
+      isSmallViewport: false,
+      isLoading: true,
+      tutorials: [], // Initialize the tutorials array
+      menuItems: [
+        { label: 'All', filter: '' },
+        { label: 'Beginner', filter: 'Beginner' },
+        { label: 'Intermediate', filter: 'Intermediate' },
+        { label: 'Advanced', filter: 'Advanced' },
+        { label: 'Python', filter: 'Python' },
+        { label: 'Java', filter: 'Java' },
+      ],
+      expandedMenuItems: [
+        { label: 'All', filter: '' },
+        { label: 'Beginner', filter: 'Beginner' },
+        { label: 'Intermediate', filter: 'Intermediate' },
+        { label: 'Advanced', filter: 'Advanced' },
+        { label: 'Python', filter: 'Python' },
+        { label: 'Java', filter: 'Java' },
+        { label: 'Web', filter: 'Web' },
+        { label: 'Networking', filter: 'Networking' },
+        { label: 'Cloud', filter: 'Cloud' },
+        { label: 'AI', filter: 'AI' },
+      ],
+      selectedMenuItem: 'All'
+    };
+  },
+  computed: {
+    popupMenuItems() {
+      return this.menuItems.map(item => ({
+        label: item.label,
+        command: () => this.filterTutorials(item.label)
+      }));
     },
-    data() {
-      return {
-        isSmallViewport: false,
-        isLoading: true,
-        tutorials: [], // Initialize the tutorials array
-        menuItems: [
-          { label: 'New', to: '/' },
-          { label: 'Beginner', to: '/projects' },
-          { label: 'Intermediate', to: '/tutorials' },
-          { label: 'Advanced', to: '/resume' }
-        ],
-        expandedMenuItems: [
-          { label: 'New', to: '/' },
-          { label: 'Beginner', to: '/projects' },
-          { label: 'Intermediate', to: '/tutorials' },
-          { label: 'Advanced', to: '/resume' },
-          { label: 'Python', to: '/' },
-          { label: 'Java', to: '/projects' },
-          { label: 'Web', to: '/tutorials' },
-          { label: 'networking', to: '/resume' },
-          { label: 'database', to: '/' },
-          { label: 'cloud', to: '/projects' },
-          { label: 'AI', to: '/tutorials' },
-          { label: 'Git', to: '/resume' }
-        ]
-      };
-    },
-    computed: {
-      popupMenuItems() {
-        return this.menuItems.map(item => ({
-          label: item.label,
-          command: () => this.$router.push(item.to)
-        }));
-      }
-    },
-    mounted() {
-      window.addEventListener('resize', this.checkViewportSize);
-      this.checkViewportSize();
-      
-      // Load tutorials when the component is mounted
-      this.loadTutorials();
-    },
-    beforeUnmount() {
-      window.removeEventListener('resize', this.checkViewportSize);
-    },
-    methods: {
-      checkViewportSize() {
-        this.isSmallViewport = window.innerWidth < 768;
-      },
-      toggleSidebar(event) {
-        if (this.isSmallViewport) {
-          event.preventDefault();
-          this.$refs.sidebarMenu.toggle(event);
-        }
-      },
-      async loadTutorials() {
-        try {
-          const response = await fetch('http://192.168.0.206:3000/tutorials');
-          if (!response.ok) {
-            throw new Error('Failed to fetch tutorials');
-          }
-          const tutorials = await response.json();
-          this.tutorials = tutorials;
-          this.isLoading = false;
-        } catch (error) {
-          console.error('Error loading tutorials:', error);
-          this.isLoading = false;
-        }
+    filteredTutorials() {
+      if (this.selectedMenuItem === 'All') {
+        return this.tutorials;
+      } else {
+        return this.tutorials.filter(tutorial => tutorial.languages.includes(this.selectedMenuItem));
       }
     }
-  };
+  },
+  mounted() {
+    window.addEventListener('resize', this.checkViewportSize);
+    this.checkViewportSize();
+
+    // Load tutorials when the component is mounted
+    this.loadTutorials();
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.checkViewportSize);
+  },
+  methods: {
+    checkViewportSize() {
+      this.isSmallViewport = window.innerWidth < 768;
+    },
+    toggleSidebar(event) {
+      if (this.isSmallViewport) {
+        event.preventDefault();
+        this.$refs.sidebarMenu.toggle(event);
+      }
+    },
+    async loadTutorials() {
+      try {
+        const response = await fetch('http://68.7.149.165:8066/tutorials');
+        if (!response.ok) {
+          throw new Error('Failed to fetch tutorials');
+        }
+        const tutorials = await response.json();
+        this.tutorials = tutorials;
+        this.isLoading = false;
+      } catch (error) {
+        console.error('Error loading tutorials:', error);
+        this.isLoading = false;
+      }
+    },
+    filterTutorials(menuItemLabel) {
+      this.selectedMenuItem = menuItemLabel;
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -147,15 +158,15 @@
         background-color: #929292;
     }
    .tutorial_menu_button {
-    padding: 0%;
-    padding-top: 2%;
-    padding-left: 3%;
-    padding-right: 3%;
-    margin: 0%;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: start;
+      padding: 0%;
+      padding-top: 2%;
+      padding-left: 3%;
+      padding-right: 3%;
+      margin: 0%;
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      align-items: start;
    }
   .container {
     height: calc(100vh - 81px);
@@ -212,7 +223,7 @@
     color: #fff;
     padding: 0%;
     margin: 0%;
-    font-weight: 100;
+    font-weight: 600;
   }
   router-link {
     text-decoration: none;
@@ -242,6 +253,7 @@
 .p-card-title {
   font-family: 'Roboto', sans-serif !important;
   font-size: calc(16px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+  height: 50px;
 }
 .p-card-content {
   font-family: 'Roboto', sans-serif !important;
@@ -253,6 +265,9 @@
   font-size: calc(10px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
   font-weight: 200 !important;
 }
+.p-card-body {
+  height: 100%;
+}
 .projects-grid {
   margin: 0 auto;
   padding: 0%;
@@ -263,12 +278,18 @@
   overflow: hidden !important;
   background-color: #ffffff;
   color: #000000;
+  height: 400px;
 }
 .card_image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
+.p-card.p-component {
+  height: 100%;
+  padding: 0%;
+  margin: 0%;
+  cursor: default;
+}
 </style>
   
