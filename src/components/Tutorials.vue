@@ -27,14 +27,14 @@
               {{ tutorial.languages.join(', ') }}
             </template>
             <template #footer>
-              <Button label="Start" severity="success" outlined rounded/>
+              <Button label="Start" severity="success" outlined rounded @click="openModal(tutorial)"/>
             </template>
           </Card>
         </li>
       </ul>
     </div>
-
     <Menu ref="sidebarMenu" id="sidebar_menu" :model="popupMenuItems" :popup="true" />
+    <Modal :showModal="showModal" :tutorial="selectedTutorial" @close="closeModal" />
   </div>
 </template>
 
@@ -42,6 +42,7 @@
 import Card from 'primevue/card';
 import Loading from './LoadingProjects.vue';
 import Button from 'primevue/button';
+import Modal from './tutorial_modal.vue';
 
 
 export default {
@@ -49,7 +50,8 @@ export default {
   components: {
     Card,
     Loading,
-    Button
+    Button,
+    Modal
   },
   data() {
     return {
@@ -76,7 +78,9 @@ export default {
         { label: 'Cloud', filter: 'Cloud' },
         { label: 'AI', filter: 'AI' },
       ],
-      selectedMenuItem: 'All'
+      selectedMenuItem: 'All',
+      showModal: false,
+      selectedTutorial: null
     };
   },
   computed: {
@@ -130,6 +134,14 @@ export default {
     },
     filterTutorials(menuItemLabel) {
       this.selectedMenuItem = menuItemLabel;
+    },
+    openModal(tutorial) {
+      this.selectedTutorial = tutorial;
+      this.showModal = true;
+    },
+    closeModal() {
+      this.selectedTutorial = null;
+      this.showModal = false;
     }
   }
 };
@@ -223,7 +235,7 @@ export default {
     color: #fff;
     padding: 0%;
     margin: 0%;
-    font-weight: 600;
+    font-weight: 400;
   }
   router-link {
     text-decoration: none;
@@ -240,8 +252,8 @@ export default {
   }
   .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Adjust the column width as needed */
-  grid-gap: 20px; /* Adjust the gap between grid items */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+  grid-gap: 20px;
   list-style: none;
   padding-top: 0%;
   padding-left: 3%;
@@ -249,20 +261,20 @@ export default {
   padding-bottom: 0%;
   overflow: auto !important;
 }
-/* Adjust title font size dynamically */
+
 .p-card-title {
   font-family: 'Roboto', sans-serif !important;
-  font-size: calc(16px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+  font-size: calc(16px + (14 - 12) * ((100vw - 300px) / (1600 - 300)));
   height: 50px;
 }
 .p-card-content {
   font-family: 'Roboto', sans-serif !important;
-  font-size: calc(8px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+  font-size: calc(8px + (14 - 12) * ((100vw - 300px) / (1600 - 300)));
   font-weight: 200 !important;
 }
 .p-card-subtitle {
   font-family: 'Roboto', sans-serif !important;
-  font-size: calc(10px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+  font-size: calc(10px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); 
   font-weight: 200 !important;
 }
 .p-card-body {
@@ -290,6 +302,27 @@ export default {
   padding: 0%;
   margin: 0%;
   cursor: default;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+}
+
+.modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%; 
+  max-height: 80%; 
+  overflow-y: auto; 
+  z-index: 99999;
 }
 </style>
   
