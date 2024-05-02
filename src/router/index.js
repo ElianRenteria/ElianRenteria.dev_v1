@@ -1,13 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/Home.vue';
-import Resume from '../components/Resume.vue';
 import Projects from '../components/Projects.vue';
+import Tutorials from '../components/Tutorials.vue';
+import Resume from '../components/Resume.vue';
 import Contact from '../components/Contact.vue';
 
 const routes = [
     { path: '/', component: Home },
-    { path: '/resume', component: Resume },
     { path: '/projects', component: Projects },
+    { path: '/tutorials', component: Tutorials },
+    { path: '/resume', component: Resume },
     { path: '/contact', component: Contact }
 ];
 

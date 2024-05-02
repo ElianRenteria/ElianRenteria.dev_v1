@@ -41,7 +41,7 @@ export default {
 
         // Fetch languages for each repository
         await Promise.all(allRepos.map(async repo => {
-          const languagesResponse = await axios.get(repo.languages_url);
+          const languagesResponse = await axios.get(repo.languages_url, {headers: {Authorization: `Bearer ${githubToken}`}});
           repo.languages = Object.keys(languagesResponse.data);
         }));
 
@@ -111,11 +111,23 @@ p {
   grid-gap: 20px; /* Adjust the gap between grid items */
   list-style: none;
   padding: 0;
+  overflow: auto !important;
 }
 
 /* Adjust title font size dynamically */
 .p-card-title {
-  font-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+  font-family: 'Roboto', sans-serif !important;
+  font-size: calc(16px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+}
+.p-card-content {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: calc(8px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+  font-weight: 200 !important;
+}
+p-card-subtitle {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: calc(10px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size as needed */
+  font-weight: 200 !important;
 }
 .projects-grid {
   margin: 0 auto;
