@@ -27,7 +27,7 @@
               {{ tutorial.languages.join(', ') }}
             </template>
             <template #footer>
-              <Button label="Start" severity="success" outlined rounded @click="openModal(tutorial)"/>
+              <Button label="Start" severity="info" outlined rounded @click="openModal(tutorial)"/>
             </template>
           </Card>
         </li>
@@ -150,7 +150,7 @@ export default {
 <style scoped>
     .sidebar_menu {
         min-width: 250px;
-        background-color: #333;
+        background-color: #333333cc;
         color: #fff;
         display: flex;
         flex-direction: column;
@@ -167,7 +167,7 @@ export default {
         width: 100%;
         height: 100%;
         overflow: auto;
-        background-color: #929292;
+        background-color: #9292921e;
     }
    .tutorial_menu_button {
       padding: 0%;
@@ -288,7 +288,7 @@ export default {
 }
 .p-card{
   overflow: hidden !important;
-  background-color: #ffffff;
+  background-color: #ffffffe1;
   color: #000000;
   height: 400px;
 }

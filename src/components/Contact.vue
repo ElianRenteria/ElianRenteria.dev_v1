@@ -28,6 +28,9 @@
   </script>
   
   <style scoped>
+  .p-card{
+    background-color: #1b1b1bc0;
+  }
   .contact {
     justify-content: center;
     align-items: center;
