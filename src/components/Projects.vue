@@ -3,6 +3,7 @@ import axios from 'axios';
 import Card from 'primevue/card';
 import Loading from './LoadingProjects.vue';
 
+
 export default {
   name: 'projects',
   data() {
@@ -137,5 +138,7 @@ p-card-subtitle {
 }
 .p-card{
   overflow: hidden !important;
+  background-color: #1b1b1bc0;
 }
+
 </style>

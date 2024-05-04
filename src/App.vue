@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div class="Background">
+        <Background />
+    </div>
     <Loading v-if="isLoading" />
     <div class="content" v-else>
       <canvas ref="causticsCanvas" class="caustics"></canvas>
@@ -15,12 +18,14 @@
 
 import Loading from './components/Loading.vue';
 import NavBar from './components/NavBar.vue';
+import Background from './components/background.vue';
 
 export default {
   name: 'App',
   components: {
     Loading,
     NavBar,
+    Background
   },
   data() {
     return {
@@ -103,5 +108,13 @@ export default {
   pointer-events: none; 
   z-index: -1;
   opacity: .3;
+}
+.Background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -9999; /* Ensure background is behind content */
 }
 </style>
