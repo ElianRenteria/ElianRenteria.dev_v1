@@ -120,7 +120,7 @@ export default {
     },
     async loadTutorials() {
       try {
-        const response = await fetch('http://68.7.149.165:8066/tutorials');
+        const response = await fetch('https://elianrenteria.net:8066/tutorials');
         if (!response.ok) {
           throw new Error('Failed to fetch tutorials');
         }
