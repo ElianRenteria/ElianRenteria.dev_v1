@@ -1,9 +1,11 @@
 <script>
     import Card from 'primevue/card';
+    import Background from './background.vue';
     export default {
         name: '/',
         components: {
-            Card
+            Card,
+            Background
         },
         data() {
             return {
@@ -27,6 +29,9 @@
 </script>
 
 <template>
+    <div class="Background">
+        <Background />
+    </div>
     <Card class="information">
         <template #title><div class="custom-title">Welcome to My Digital Portfolio</div></template>
         <template #content>
@@ -159,6 +164,14 @@
         padding: 0;
         height: 0;
         width: 0;
+    }
+    .Background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -9999; /* Ensure background is behind content */
     }
 </style>
 
