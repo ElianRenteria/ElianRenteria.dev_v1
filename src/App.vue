@@ -3,11 +3,10 @@
     <div class="Background">
         <Background />
     </div>
-    <Loading v-if="isLoading" />
+    <Loading v-if="isLoading" class="prevent-hover-change"/>
     <div class="content" v-else>
-      <canvas ref="causticsCanvas" class="caustics"></canvas>
-      <NavBar />
-      <div class="content_body" :sytle="getContentBodyStyles">
+      <NavBar class="prevent-hover-change"/>
+      <div class="content_body prevent-hover-change" :sytle="getContentBodyStyles">
         <router-view />
       </div>
     </div>
@@ -99,16 +98,6 @@ export default {
 .content.fade-in {
   opacity: 1;
 }
-.caustics {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; 
-  z-index: -1;
-  opacity: .3;
-}
 .Background {
     position: fixed;
     top: 0;
@@ -116,5 +105,8 @@ export default {
     width: 100%;
     height: 100%;
     z-index: -9999; /* Ensure background is behind content */
+}
+.prevent-hover-change {
+    cursor: default !important; /* or cursor: pointer; depending on your preference */
 }
 </style>

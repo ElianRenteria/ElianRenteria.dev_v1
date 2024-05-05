@@ -27,7 +27,7 @@
 </script>
 
 <template>
-    <Card class="information">
+    <Card class="information prevent-hover-change" >
         <template #title><div class="custom-title">Welcome to My Digital Portfolio</div></template>
         <template #content>
           <div :class="{ 'inner-cards-row': isWideScreen, 'inner-cards-column': !isWideScreen}, information">
@@ -159,6 +159,9 @@
         padding: 0;
         height: 0;
         width: 0;
+    }
+    .prevent-hover-change {
+        cursor: default !important; /* or cursor: pointer; depending on your preference */
     }
 </style>
 

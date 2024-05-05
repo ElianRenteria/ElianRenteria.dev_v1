@@ -140,5 +140,4 @@ p-card-subtitle {
   overflow: hidden !important;
   background-color: #1b1b1bc0;
 }
-
 </style>
