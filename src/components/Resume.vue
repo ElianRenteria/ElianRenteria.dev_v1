@@ -22,7 +22,7 @@
     data() {
       return {
         showButton: false,
-        downloadLink: 'https://drive.google.com/uc?export=download&id=1WbqYJIHBEsW8NA-0pUzZmx8RtYd6Ic0B',
+        downloadLink: 'https://drive.google.com/uc?export=download&id=1FJC8rOLGk-q0I6bO8sk9wMsVF930Ptrh',
       };
     },
   };
