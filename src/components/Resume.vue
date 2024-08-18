@@ -29,8 +29,11 @@
   </script>
   
   <style scoped>
+
   .resume-card {
     position: relative;
+    width: 50%;
+    height: auto;
   }
   
   .image-container {
