@@ -32,7 +32,7 @@
 
   .resume-card {
     position: relative;
-    width: 50%;
+    width: auto;
     height: auto;
   }
   
