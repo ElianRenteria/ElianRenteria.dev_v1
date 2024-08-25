@@ -24,7 +24,7 @@ export default {
     async fetchProjects() {
       try {
         // Retrieve GitHub access token from Cloudflare Worker endpoint
-        const envResponse = await axios.get('https://hello-world-weathered-mountain-8ec2.bravefrontier5913.workers.dev/');
+        const envResponse = await axios.get('worker-endpoint-url');
         const githubToken = envResponse.data.githubToken;
         // Fetch repositories using the retrieved GitHub access token
         let allRepos = [];
